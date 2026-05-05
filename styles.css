@@ -191,6 +191,270 @@ a {
   max-width: 18ch;
 }
 
+.page-content h2,
+.page-content h3 {
+  color: var(--text);
+}
+
+.page-content h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.page-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.page-content ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.page-content li {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.observatory-page {
+  padding-bottom: 5rem;
+}
+
+.observatory-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.observatory-hero-copy {
+  padding: 2rem;
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at top left, rgba(178, 76, 43, 0.12), transparent 36%),
+    rgba(255, 250, 242, 0.72);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.observatory-hero .lead {
+  margin-top: 0;
+  font-size: 1.22rem;
+  color: var(--text);
+}
+
+.observatory-highlight,
+.goal-card,
+.feature-figure {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.observatory-highlight {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(17, 24, 33, 0.95), rgba(30, 39, 54, 0.94));
+  color: #f5f1ea;
+}
+
+.observatory-highlight h2,
+.observatory-highlight li {
+  color: inherit;
+}
+
+.observatory-highlight ul {
+  display: grid;
+  gap: 0.8rem;
+  padding-left: 1.1rem;
+}
+
+.observatory-section {
+  margin-top: 2.25rem;
+}
+
+.observatory-section .observatory-highlight {
+  max-width: 720px;
+}
+
+.section-heading {
+  margin-bottom: 1.2rem;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.goal-card {
+  padding: 1.25rem;
+  border-radius: 1.3rem;
+  background: var(--surface);
+}
+
+.goal-card p,
+.section-note {
+  margin: 0;
+}
+
+.section-note {
+  margin-top: 1.1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.observatory-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.feature-figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--surface);
+}
+
+.feature-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.feature-figure figcaption {
+  padding: 1rem 1.1rem 1.15rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.hero-video video {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  width: 100%;
+  background: black; /* fills empty space */
+}
+
+.hero-figure img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.hero-figure2 img {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+.map-figure img {
+  max-height: none;
+  object-fit: contain;
+  background: rgba(255, 248, 240, 0.9);
+}
+
+.map-figure {
+  max-width: 340px;
+  justify-self: end;
+}
+
+.cmb-page {
+  padding-bottom: 5rem;
+}
+
+.cmb-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.cmb-hero-copy {
+  padding: 2rem;
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at top left, rgba(234, 182, 157, 0.18), transparent 38%),
+    rgba(255, 250, 242, 0.74);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.cmb-hero .lead {
+  margin-top: 0;
+  font-size: 1.22rem;
+  color: var(--text);
+}
+
+.cmb-summary {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(17, 24, 33, 0.95), rgba(40, 50, 67, 0.94));
+  color: #f5f1ea;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.cmb-summary h2,
+.cmb-summary li {
+  color: inherit;
+}
+
+.cmb-summary ul {
+  display: grid;
+  gap: 0.8rem;
+  padding-left: 1.1rem;
+}
+
+.cmb-section {
+  margin-top: 2.25rem;
+}
+
+.cmb-explainer,
+.cmb-split {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.cmb-explainer {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
+}
+
+.cmb-split {
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.1fr);
+}
+
+.cmb-split.reverse {
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.95fr);
+}
+
+.cmb-figure-stack {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.spectrum-figure img,
+.timeline-figure img,
+.cmb-map-figure img {
+  background: rgba(255, 248, 240, 0.92);
+}
+
+.history-figure {
+  max-width: 430px;
+}
+
+.timeline-figure img,
+.cmb-map-figure img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .section-links {
   display: flex;
   flex-wrap: wrap;
@@ -376,6 +640,117 @@ button:disabled {
   gap: 1rem;
 }
 
+.mapping-scan-canvas {
+  touch-action: none;
+  aspect-ratio: 1 / 1;
+  cursor: crosshair;
+}
+
+.mapping-result-grid,
+.mapping-secondary-grid {
+  margin-top: 1rem;
+}
+
+.mapping-secondary-grid .panel:first-child .wide-canvas {
+  height: 100%;
+  min-height: 260px;
+}
+
+.component-toggle-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.component-toggle {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(27, 36, 48, 0.04);
+}
+
+.component-toggle label {
+  display: flex;
+  gap: 0.7rem;
+  align-items: start;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.component-toggle input[type="checkbox"] {
+  margin-top: 0.18rem;
+}
+
+.component-toggle p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.telescope-builder-layout,
+.telescope-builder-results {
+  margin-top: 0.5rem;
+}
+
+.telescope-train-canvas,
+.telescope-image-canvas {
+  max-width: 100%;
+}
+
+.telescope-train-canvas {
+  min-height: 760px;
+}
+
+.telescope-image-canvas {
+  aspect-ratio: 1 / 1;
+  width: min(100%, 360px);
+  margin: 0 auto;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+
+.metric-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 250, 242, 0.92);
+}
+
+.metric-card strong,
+.metric-card span {
+  display: block;
+}
+
+.metric-card strong {
+  margin-bottom: 0.35rem;
+}
+
+.metric-card span {
+  color: var(--muted);
+}
+
+.metric-good {
+  border-color: rgba(71, 140, 92, 0.32);
+  background: rgba(238, 248, 241, 0.95);
+}
+
+.metric-mid {
+  border-color: rgba(210, 154, 67, 0.35);
+  background: rgba(255, 247, 232, 0.98);
+}
+
+.metric-bad {
+  border-color: rgba(186, 84, 65, 0.34);
+  background: rgba(255, 241, 238, 0.98);
+}
+
 .bottom-banner {
   margin-top: 2.5rem;
   overflow: hidden;
@@ -433,12 +808,33 @@ select {
 
   .split-layout,
   .triple-layout,
-  .test-grid {
+  .test-grid,
+  .metric-grid,
+  .goal-grid,
+  .observatory-hero,
+  .observatory-media,
+  .cmb-hero,
+  .cmb-explainer,
+  .cmb-split,
+  .cmb-split.reverse {
     grid-template-columns: 1fr;
   }
 
   .interactive-shell {
     padding: 1rem;
+  }
+
+  .observatory-hero-copy,
+  .observatory-highlight,
+  .cmb-hero-copy,
+  .cmb-summary {
+    padding: 1.35rem;
+  }
+
+  .history-figure,
+  .map-figure {
+    max-width: none;
+    justify-self: stretch;
   }
 }
 

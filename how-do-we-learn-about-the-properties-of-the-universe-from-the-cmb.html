@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How do we learn about the properties of the Universe from the CMB?</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <img class="site-header-bg" src="data/CCMarApr22_CMB-hero-1024x321.jpg" alt="" />
+      <div class="site-header-scrim"></div>
+      <div class="container site-header-inner">
+        <a class="site-header-logo" href="index.html">
+          <img src="data/SO_Logo_final_no_text.png" alt="Simons Observatory logo" />
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="introducing-the-simons-observatory.html">Introducing the Simons Observatory</a>
+          <a href="what-is-the-cosmic-microwave-background-cmb.html">What is the cosmic microwave background (CMB)?</a>
+          <a href="what-causes-the-CMB-pattern.html">What causes the CMB pattern?</a>a
+          <a href="how-do-we-measure-the-cmb.html">How do we measure the CMB?</a>
+          <a href="how-do-we-learn-about-the-properties-of-the-universe-from-the-cmb.html" aria-current="page">How do we learn about the properties of the Universe from the CMB?</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-content interactive-page">
+      <section class="page-intro">
+        <p class="eyebrow"></p>
+        <h1>How do we learn about the properties of the Universe from the CMB?</h1>
+        <p>
+          In the <a href="what-causes-the-CMB-pattern"> What causes the CMB pattern? </a> section, we showed a simple way of extracting some information from the CMB.
+          
+          Here we will explore a more sophisticated approach, based on Fourier transforms. Fourier transforms are incredibly useful and have diverse applications from the mobile phone communications to the cosmos! This section builds up the key ideas underpinning how we go from CMB images to cosmological constraints! We utilize the following interactive exerices:
+        </p>
+        <div class="section-links" aria-label="Interactive section links">
+          <a href="#single-mode">What is a Fourier Mode?</a>
+          <a href="#image-analysis">Image Analysis 101</a>
+          <a href="#cmb-mode">Image Analysis applied to the CMB</a>
+          <a href="#draw-mode">Realize your own power spectrum</a>
+          <a href="#test-mode">The cosmic test</a>
+          <a href="#properties">Connecting to the Universe's properties</a>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="single-mode">
+        <div class="section-copy">
+          <p class="eyebrow">Part 1</p>
+          <h2>What is a Fourier Mode?</h2>
+          <p>
+            One of the most powerful, but counter intuitive, tools scientist use is Fourier analysis.
+            
+            The key idea here is to decompose your original signal into a series of waves. 
+
+            The app below shows what all the possible 2D waves look like. Each wave is characterised by three properties:
+            <ul>
+                <li> The frequency: how fast is the wave oscilating?</li>
+                <li> The amplitude: how large is the wave?</li>
+                <li> The phase: when is the wave at its lowest point?</li>
+            </ul>
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel panel-dark">
+              <canvas id="singleModeCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+            <div class="panel panel-controls">
+              <div class="control-group">
+                <label for="singleGridCanvas">Frequency Grid</label>
+                <canvas id="singleGridCanvas" class="grid-canvas" width="320" height="320"></canvas>
+              </div>
+              <div class="control-group">
+                <label for="singleAmplitude">Amplitude</label>
+                <input id="singleAmplitude" type="range" min="0" max="1" step="0.01" value="1" />
+                <output id="singleAmplitudeValue">1.00</output>
+              </div>
+              <div class="control-group">
+                <label for="singlePhase">Phase</label>
+                <input id="singlePhase" type="range" min="0" max="6.283" step="0.01" value="0" />
+                <output id="singlePhaseValue">0.00π</output>
+              </div>
+              <div class="info-box" id="singleModeInfo"></div>
+              <button id="singleReset" type="button">Reset Parameters</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="image-analysis">
+        <div class="section-copy">
+          <p class="eyebrow">Part 2</p>
+          <h2>Image Analysis 101</h2>
+          <p>
+            In Fourier analysis, we take an image and express it in terms of the amplitudes and phases of for every possible wavelenght!
+
+            Try this out for yourself. Upload a picture and see how it looks in Fourier space. The left image shows your uploaded image, the center panel is the amplitude for each different frequency and the final panel shows the phase.
+   </p>
+            <p>
+            The filter option demonstrates a few operations we can apply to the image in Fourier space and how they impact the original image.
+            These provide some insight into the different roles of Fourier scale and information in the phases vs amplitudes.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="toolbar-stack">
+            <label class="file-input">
+              <span>Choose image</span>
+              <input id="imageUpload" type="file" accept="image/*" />
+            </label>
+            <label>
+              Filter
+              <select id="imageFilter">
+                <option value="none">None</option>
+                <option value="lowPass">Low-pass</option>
+                <option value="highPass">High-pass</option>
+                <option value="randomPhases">Random phases</option>
+                <option value="randomAmplitudes">Random amplitudes</option>
+              </select>
+            </label>
+            <label class="slider-label" for="imageRadius">
+              Radius
+              <input id="imageRadius" type="range" min="0.05" max="1" step="0.01" value="0.25" />
+              <output id="imageRadiusValue">0.25</output>
+            </label>
+          </div>
+          <div class="interactive-layout triple-layout">
+            <div class="panel panel-dark">
+              <h3>Real Space</h3>
+              <canvas id="imageRealCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+            <div class="panel panel-dark">
+              <h3>Amplitude</h3>
+              <canvas id="imageAmpCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+            <div class="panel panel-dark">
+              <h3>Phase</h3>
+              <canvas id="imagePhaseCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="cmb-mode">
+        <div class="section-copy">
+          <p class="eyebrow">Part 3</p>
+          <h2>Image Analysis applied to the CMB</h2>
+          <p>
+            Next we apply these methods to a simulated observation of the CMB. Use the app below to generate a mock CMB.
+            What do you notice about the Fourier space amplitudes and phases?
+          </p>
+
+
+        </div>
+        <div class="interactive-shell">
+          <div class="toolbar-stack">
+            <label class="slider-label" for="cmbEllScale">
+              Angular scale
+              <input id="cmbEllScale" type="range" min="10" max="60" step="1" value="30" />
+              <output id="cmbEllScaleValue">30</output>
+            </label>
+            
+<!--  <label class="slider-label" for="cmbTilt">
+              Spectral tilt
+              <input id="cmbTilt" type="range" min="0" max="2" step="0.05" value="1" />
+              <output id="cmbTiltValue">1.00</output>
+            </label> -->
+            <button id="cmbRegenerate" type="button">Regenerate</button>
+          </div>
+          <div class="interactive-layout triple-layout">
+            <div class="panel panel-dark">
+              <h3>CMB Map</h3>
+              <canvas id="cmbRealCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+            <div class="panel panel-dark">
+              <h3>Amplitude</h3>
+              <canvas id="cmbAmpCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+            <div class="panel panel-dark">
+              <h3>Phase</h3>
+              <canvas id="cmbPhaseCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+          </div>
+          <div class="panel spectrum-panel">
+            <h3>The power spectrum</h3>
+            <canvas id="cmbSpectrumCanvas" class="wide-canvas" width="920" height="260"></canvas>
+          </div>
+        </div>
+
+          <p>
+            The CMB is random. Each realization looks different. The CMB phases carry no information. However, on average the CMB amplitude looks the same in every direction in Fourier space.
+             This embodies a physical principle that the sky is isotropic! This means we can reduce the 2D Fourier space object to 1D, which we call the power spectrum!
+             This is the average 2D Fourier amplitude in a radial ring. The structure of power spectrum contains the information of the CMB.
+          </p>
+      </section>
+
+      <section class="interactive-section" id="draw-mode">
+        <div class="section-copy">
+          <p class="eyebrow">Part 4</p>
+          <h2>Realize your own power spectrum</h2>
+          <p>
+            To get a better idea of what the power spectrum contains, try drawing different power spectra. Pressing the generate will generate a new random draw. Each with the same power spectrum.
+            Similarly different structures in the power spectrum lead to different types of features in the maps. 
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel panel-controls">
+              <div class="editor-header">
+                <div>
+                  <h3>Power Spectrum P(k)</h3>
+                  <p class="status-text">Draw and generate!</p>
+                </div>
+                <div class="button-row">
+                  <button id="drawClear" type="button">Clear</button>
+                  <button id="drawGenerate" type="button">Generate GRF</button>
+                </div>
+              </div>
+              <canvas id="drawSpectrumCanvas" class="wide-canvas editor-canvas" width="520" height="280"></canvas>
+            </div>
+            <div class="panel panel-dark">
+              <h3>Gaussian Random Field</h3>
+              <canvas id="drawFieldCanvas" class="display-canvas" width="448" height="448"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="test-mode">
+        <div class="section-copy">
+          <p class="eyebrow">Part 5</p>
+          <h2>The cosmic test</h2>
+          <p>
+           Judging whether two maps are the same is hard. Try to guess the power spectrum from one realization of the map. 
+           Even if you have the exact power spectrum, do the maps look the same?
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel panel-controls">
+              <div class="editor-header">
+                <div>
+                  <h3>Draw the Power Spectrum</h3>
+                  <p class="status-text" id="testChallengeName">Press “New Challenge” to begin. This editor uses logarithmic k and P(k) axes.</p>
+                </div>
+                <div class="button-row">
+                  <button id="testNewChallenge" type="button">New Challenge</button>
+                  <button id="testGenerateUser" type="button">Generate My GRF</button>
+                  <button id="testScore" type="button">Score My Spectrum</button>
+                </div>
+              </div>
+              <canvas id="testSpectrumCanvas" class="wide-canvas editor-canvas" width="520" height="280"></canvas>
+              <div class="info-box" id="testScoreBox">No score yet.</div>
+            </div>
+            <div class="panel panel-dark">
+              <div class="test-grid">
+                <div>
+                  <h3>Target</h3>
+                  <canvas id="testTargetCanvas" class="display-canvas" width="448" height="448"></canvas>
+                </div>
+                <div>
+                  <h3>Your GRF</h3>
+                  <canvas id="testUserCanvas" class="display-canvas" width="448" height="448"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          Taken together these show that judging the information in a CMB map direclty is hard! 
+          The CMB map is random, but that does not mean it contains no information.
+
+          Fourier tools allow us to access the coherent structure via the power spectrum. The specific shape of the power spectrum contains cosmic information.
+          
+         </p>
+      </section>
+
+
+      <section class="interactive-section" id="properties">
+        <div class="section-copy">
+          <p class="eyebrow">Part 5</p>
+          <h2>Connecting to the Universe's properties</h2>
+        <p>
+          Taken together these show that judging the information in a CMB map direclty is hard! 
+          The CMB map is random, but that does not mean it contains no information.
+
+          Fourier tools allow us to access the coherent structure via the power spectrum. The final question is how cosmic information is contained in the power spectrum?
+          That is explored below!
+         </p>
+
+            <figure class="feature-figure hero-video">
+            <video autoplay muted loop playsinline>
+              <source src="data/powerspectra.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>
+              The shape of the power spectrum is highly sensitive to the compisition, age and properites of the primordial Universe.
+              This makes it a powerful tool for studying the Universe.
+            </figcaption>
+          </figure>
+      </section>
+    </main>
+
+    <script src="data/test-cls.js"></script>
+    <script src="interactive-cmb.js"></script>
+  </body>
+</html>
