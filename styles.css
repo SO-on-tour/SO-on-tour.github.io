@@ -395,6 +395,63 @@ a {
   color: var(--text);
 }
 
+.cmb-composition-section .composition-box {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.6rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.composition-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  object-fit: contain;
+}
+
+.composition-controls {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+
+.composition-control {
+  gap: 0.55rem;
+}
+
+.composition-control-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.composition-control label {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.composition-control output {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.composition-scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.composition-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
 .cmb-summary {
   padding: 1.5rem;
   border-radius: 1.5rem;
@@ -834,7 +891,8 @@ select {
   .observatory-hero-copy,
   .observatory-highlight,
   .cmb-hero-copy,
-  .cmb-summary {
+  .cmb-summary,
+  .composition-controls {
     padding: 1.35rem;
   }
 

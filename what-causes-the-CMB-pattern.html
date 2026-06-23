@@ -150,6 +150,77 @@
           </figure>
       </section>
 
+      <section class="cmb-hero cmb-composition-section">
+        <div class="cmb-hero-copy">
+          <p class="eyebrow">Try the knobs</p>
+          <h1>How the cosmic recipe changes the wave</h1>
+          <p class="lead">
+            The simulation below lets you switch between three values for ordinary matter,
+            dark matter, and the number of different particle species.
+          </p>
+          <p>
+            Move each slider from less to more to pick a new video. The controls start muted,
+            but you can unmute the sound with the video player if you want to hear the animation.
+          </p>
+        </div>
+
+        <div class="composition-box">
+          <video
+            id="composition-demo-video"
+            class="composition-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="auto"
+            aria-label="Simulation showing how the cosmic wave changes with the selected universe composition"
+          >
+            <source src="data/Videos/bao_mass_2d_radiation_0.0224_0.12_3.05_1075.0.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          <div class="composition-controls" aria-label="Cosmic composition controls">
+            <div class="control-group composition-control">
+              <div class="composition-control-header">
+                <label for="composition-ombh2">Amount of ordinary matter</label>
+              </div>
+              <div class="composition-scale" aria-hidden="true">
+                <span>Less</span>
+                <span>More</span>
+              </div>
+              <input id="composition-ombh2" type="range" min="0" max="2" step="1" value="1" />
+            </div>
+
+            <div class="control-group composition-control">
+              <div class="composition-control-header">
+                <label for="composition-omch2">Amount of dark matter</label>
+              </div>
+              <div class="composition-scale" aria-hidden="true">
+                <span>Less</span>
+                <span>More</span>
+              </div>
+              <input id="composition-omch2" type="range" min="0" max="2" step="1" value="1" />
+            </div>
+
+            <div class="control-group composition-control">
+              <div class="composition-control-header">
+                <label for="composition-neff">Number of different particles</label>
+              </div>
+              <div class="composition-scale" aria-hidden="true">
+                <span>Fewer</span>
+                <span>More</span>
+              </div>
+              <input id="composition-neff" type="range" min="0" max="2" step="1" value="1" />
+            </div>
+
+            <p class="composition-note" id="composition-status" aria-live="polite">
+              The video shows the middle setting for all three sliders.
+            </p>
+          </div>
+        </div>
+      </section>
+
 
 
       <section class="cmb-hero">
@@ -249,5 +320,6 @@ Simons Observatory researchers work to undo this mixing to study both the compos
 
       
     </main>
+    <script src="cmb-composition-demo.js"></script>
   </body>
 </html>
