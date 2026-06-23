@@ -340,6 +340,13 @@ a {
   background: black; /* fills empty space */
 }
 
+.hero-video-long video {
+  aspect-ratio: 3 / 5;  /* taller box */
+  width: 100%;
+  object-fit: contain;
+  background: black;
+}
+
 .hero-figure img {
   aspect-ratio: 4 / 3;
   object-fit: cover;
