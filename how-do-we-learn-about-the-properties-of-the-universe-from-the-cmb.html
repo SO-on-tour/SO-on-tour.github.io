@@ -30,36 +30,288 @@
         <p class="eyebrow"></p>
         <h1>How do we learn about the properties of the Universe from the CMB?</h1>
         <p>
-          In the <a href="what-causes-the-CMB-pattern"> What causes the CMB pattern? </a> section, we showed a simple way of extracting some information from the CMB.
-          
-          Here we will explore a more sophisticated approach, based on Fourier transforms. Fourier transforms are incredibly useful and have diverse applications from the mobile phone communications to the cosmos! This section builds up the key ideas underpinning how we go from CMB images to cosmological constraints! We utilize the following interactive exercises:
+          In the <a href="what-causes-the-CMB-pattern.html">What causes the CMB pattern?</a> section, we showed a simple way of extracting some information from the CMB.
         </p>
-        <div class="section-links" aria-label="Interactive section links">
-          <a href="#single-mode">What is a Fourier Mode?</a>
-          <a href="#image-analysis">Image Analysis 101</a>
-          <a href="#cmb-mode">Image Analysis applied to the CMB</a>
-          <a href="#draw-mode">Realize your own power spectrum</a>
-          <a href="#test-mode">The cosmic test</a>
-          <a href="#properties">Connecting to the Universe's properties</a>
+        <p>
+          Here the story is split into two parts. First, we use sound as an analogy for the CMB, because pitch, loudness, and spectra are familiar ideas. Second, we turn to image analysis and Fourier tools to show how cosmologists convert complicated sky maps into precise measurements of the Universe.
+        </p>
+        <div class="section-link-groups" aria-label="Interactive section links">
+          <section class="section-link-group">
+            <h2>Section 1: Sound</h2>
+            <div class="section-links">
+              <a href="#sound">Overview</a>
+              <a href="#sound-pitch">Sound 1: Pitch and volume</a>
+              <a href="#sound-mic">Sound 2: Try it yourself</a>
+              <a href="#sound-cosmic">Sound 3: Cosmic sound waves</a>
+              <a href="#sound-spikes">Sound 4: Acoustic spikes</a>
+              <a href="#sound-orchestra">Sound 5: Cosmic orchestra</a>
+              <a href="#sound-real">Sound 6: The real Universe</a>
+            </div>
+          </section>
+          <section class="section-link-group">
+            <h2>Section 2: Image Analysis</h2>
+            <div class="section-links">
+              <a href="#image-analysis">Overview</a>
+              <a href="#single-mode">Image 1: Fourier mode</a>
+              <a href="#image-analysis-101">Image 2: Image analysis 101</a>
+              <a href="#cmb-mode">Image 3: Applied to the CMB</a>
+              <a href="#draw-mode">Image 4: Your own power spectrum</a>
+              <a href="#test-mode">Image 5: The cosmic test</a>
+              <a href="#properties">Image 6: Universe properties</a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound">
+        <div class="section-copy">
+          <p class="eyebrow">Section 1</p>
+          <h2>Sound and spectra</h2>
+          <p>
+            The early Universe supported pressure waves, so sound gives us a useful analogy. Here we develop this step by step, moving from everyday ideas like pitch and volume to the way cosmologists read the CMB power spectrum.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel">
+              <h3>Why use sound?</h3>
+              <p>
+                A sound can be described by which pitches are present and how loud each one is. In exactly the same spirit, the CMB can be described by which spatial scales are present and how strong each scale is.
+              </p>
+              <p>
+                That is why spectra are such a powerful bridge: they turn complicated patterns into something we can compare, interpret, and measure.
+              </p>
+            </div>
+            <div class="panel panel-dark sound-idea-panel">
+              <h3>Core translation</h3>
+              <p>Pitch maps to frequency.</p>
+              <p>Volume maps to amplitude.</p>
+              <p>A sound spectrum maps to the CMB power spectrum.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-pitch">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 1</p>
+          <h2>Pitch and volume</h2>
+          <p>
+             Pitch is the frequency of a wave, while volume is its amplitude. A spectrum is simply a plot showing how much amplitude lives at each frequency.
+          </p>
+          <p>
+            For a single pure tone, the spectrum is simple: one strong bar at one pitch. This is the cleanest possible example of how a spectrum encodes information about a signal.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel panel-dark">
+              <h3>Single-tone spectrum</h3>
+              <canvas id="sound-pitch-canvas" class="wide-canvas sound-spectrum-canvas" width="640" height="420"></canvas>
+            </div>
+            <div class="panel panel-controls">
+              <div class="control-group">
+                <label for="sound-pitch-frequency">Pitch</label>
+                <input id="sound-pitch-frequency" type="range" min="120" max="1200" step="1" value="440" />
+                <output id="sound-pitch-frequency-output" for="sound-pitch-frequency">440 Hz</output>
+              </div>
+              <div class="control-group">
+                <label for="sound-pitch-volume">Volume</label>
+                <input id="sound-pitch-volume" type="range" min="5" max="100" step="1" value="45" />
+                <output id="sound-pitch-volume-output" for="sound-pitch-volume">45%</output>
+              </div>
+              <button type="button" id="sound-pitch-play">Play tone</button>
+              <div class="info-box" id="sound-pitch-status">
+                Move either slider to shift the highlighted bar and hear a short preview.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-mic">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 2</p>
+          <h2>Try it yourself</h2>
+          <p>
+            Speak into a microphone and watch the measured spectrum update in real time. This makes the abstract graph feel physical: different sounds produce different spectral shapes.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel panel-dark">
+              <h3>Live microphone spectrum</h3>
+              <canvas id="sound-mic-canvas" class="wide-canvas sound-spectrum-canvas" width="640" height="420"></canvas>
+            </div>
+            <div class="panel panel-controls">
+              <button type="button" id="sound-mic-toggle">Start listening</button>
+              <div class="info-box" id="sound-mic-status">
+                The browser will ask for microphone permission before the live spectrum can start.
+              </div>
+              <div class="sound-note-panel">
+                <h3>What you are seeing</h3>
+                <p>
+                  This graph shows the strength of different frequencies in your voice right now. A whistle, hum, or spoken vowel will each produce a different shape.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-cosmic">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 3</p>
+          <h2>Cosmic sound waves</h2>
+          <p>
+            Recall from earlier - the CMB is made up of primordial sound waves.
+            Not just one but a pattern composed of many sound waves combined as shown the in the animation below.
+          </p>
+          <p>
+            
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <figure class="feature-figure hero-video sound-media-figure">
+            <video autoplay muted loop playsinline controls>
+              <source src="data/ManyWaves_0.0224_0.12.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>
+              Many overlapping primordial waves combine to form the blobby CMB pattern we observe on the sky.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-spikes">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 4</p>
+          <h2>Acoustic spikes</h2>
+          <p>
+            We can use the tools outlined above to study these sound waves!
+          </p>
+          <p>
+            The CMB is not a single pure note. It contains a broad range of frequencies, but some scales are emphasized more than others. Those preferred scales show up as peaks in the power spectrum.
+          </p>
+          <p>
+            He we turn that structure into audio by shifting the cosmic frequencies into the audible range. Listening first to the main peaks and then to the full signal helps make the pattern more intuitive.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <figure class="feature-figure sound-media-figure">
+              <img src="data/cmb_with_chords.png" alt="A sketch linking CMB peaks to musical chords" />
+              <figcaption>
+                The strongest CMB peaks can be thought of as the dominant chords in a much richer cosmic sound.
+              </figcaption>
+            </figure>
+            <div class="panel panel-controls audio-stack">
+              <div class="audio-track">
+                <h3>The cosmic chords only</h3>
+                <audio controls preload="none">
+                  <source src="data/peaks_only.wav" type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+              <div class="audio-track">
+                <h3>The full cosmic symphony</h3>
+                <audio controls preload="none">
+                  <source src="data/log_spectrum.wav" type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-orchestra">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 5</p>
+          <h2>Identifying the cosmic orchestra</h2>
+          <p>
+            Once you think in terms of pitch and volume, the next step is to ask what changes the spectrum. In cosmology, changing the contents or age of the Universe shifts the heights and positions of the CMB peaks.
+          </p>
+          <p>
+            That makes the power spectrum diagnostic. By measuring its shape, we can work backward and infer what the Universe is made of.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <figure class="feature-figure hero-video sound-media-figure">
+            <video autoplay muted loop playsinline controls>
+              <source src="data/spectraOnly.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>
+              Changing the cosmic recipe shifts the CMB spectrum, which is why the spectrum can be used to identify the Universe's composition.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="sound-real">
+        <div class="section-copy">
+          <p class="eyebrow">Sound 6</p>
+          <h2>The real Universe</h2>
+          <p>
+            Finally lets compare these ideas to actual data. The observed CMB power spectrum matches the predictions of the cosmological model remarkably well.
+          </p>
+          <p>
+            That agreement is what allows us to measure quantities such as the age of the Universe and the amount of dark matter with such precision.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <figure class="feature-figure sound-media-figure">
+            <img src="data/spectraPlanck.gif" alt="Animated comparison between theoretical CMB spectra and observed Planck data" />
+            <figcaption>
+              Real CMB measurements, black points, line up closely with theory, showing that the spectrum is a precise probe of the Universe.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="interactive-section" id="image-analysis">
+        <div class="section-copy">
+          <p class="eyebrow">Section 2</p>
+          <h2>Image analysis</h2>
+          <p>
+            Sound gets us comfortable with spectra. Image analysis then does the real cosmological work. Everything below is the existing Fourier and CMB material, starting from the basic idea of a Fourier mode and building up to cosmological inference.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <div class="interactive-layout split-layout">
+            <div class="panel">
+              <h3>The central move</h3>
+              <p>
+                Instead of describing the sky map pixel by pixel, we rewrite it as a combination of waves on different angular scales. That turns a random-looking picture into a structured measurement.
+              </p>
+            </div>
+            <div class="panel sound-note-panel">
+              <h3>Connection to the sound section</h3>
+              <p>
+                A Fourier transform for images plays the same role as a spectrum for sound: it tells you which scales are present and how strong they are.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="interactive-section" id="single-mode">
         <div class="section-copy">
-          <p class="eyebrow">Part 1</p>
+          <p class="eyebrow">Image 1</p>
           <h2>What is a Fourier Mode?</h2>
           <p>
             One of the most powerful, but counterintuitive, tools scientists use is Fourier analysis.
-            
-            The key idea here is to decompose your original signal into a series of waves. 
-
-            The app below shows what all the possible 2D waves look like. Each wave is characterised by three properties:
-            <ul>
-                <li> The frequency: how fast is the wave oscillating?</li>
-                <li> The amplitude: how large is the wave?</li>
-                <li> The phase: when is the wave at its lowest point?</li>
-            </ul>
           </p>
+          <p>
+            The key idea here is to decompose your original signal into a series of waves. The app below shows what all the possible 2D waves look like. Each wave is characterised by three properties:
+          </p>
+          <ul>
+            <li>The frequency: how fast is the wave oscillating?</li>
+            <li>The amplitude: how large is the wave?</li>
+            <li>The phase: when is the wave at its lowest point?</li>
+          </ul>
         </div>
         <div class="interactive-shell">
           <div class="interactive-layout split-layout">
@@ -88,18 +340,18 @@
         </div>
       </section>
 
-      <section class="interactive-section" id="image-analysis">
+      <section class="interactive-section" id="image-analysis-101">
         <div class="section-copy">
-          <p class="eyebrow">Part 2</p>
+          <p class="eyebrow">Image 2</p>
           <h2>Image Analysis 101</h2>
           <p>
-            In Fourier analysis, we take an image and express it in terms of the amplitudes and phases for every possible wavelength!
-
+            In Fourier analysis, we take an image and express it in terms of the amplitudes and phases for every possible wavelength.
+          </p>
+          <p>
             Try this out for yourself. Upload a picture and see how it looks in Fourier space. The left image shows your uploaded image, the center panel is the amplitude for each different frequency and the final panel shows the phase.
-   </p>
-            <p>
-            The filter option demonstrates a few operations we can apply to the image in Fourier space and how they impact the original image.
-            These provide some insight into the different roles of Fourier scale and information in the phases vs amplitudes.
+          </p>
+          <p>
+            The filter option demonstrates a few operations we can apply to the image in Fourier space and how they impact the original image. These provide some insight into the different roles of Fourier scale and information in the phases vs amplitudes.
           </p>
         </div>
         <div class="interactive-shell">
@@ -143,14 +395,11 @@
 
       <section class="interactive-section" id="cmb-mode">
         <div class="section-copy">
-          <p class="eyebrow">Part 3</p>
+          <p class="eyebrow">Image 3</p>
           <h2>Image Analysis applied to the CMB</h2>
           <p>
-            Next we apply these methods to a simulated observation of the CMB. Use the app below to generate a mock CMB.
-            What do you notice about the Fourier space amplitudes and phases?
+            Next we apply these methods to a simulated observation of the CMB. Use the app below to generate a mock CMB. What do you notice about the Fourier space amplitudes and phases?
           </p>
-
-
         </div>
         <div class="interactive-shell">
           <div class="toolbar-stack">
@@ -159,12 +408,6 @@
               <input id="cmbEllScale" type="range" min="10" max="60" step="1" value="30" />
               <output id="cmbEllScaleValue">30</output>
             </label>
-            
-<!--  <label class="slider-label" for="cmbTilt">
-              Spectral tilt
-              <input id="cmbTilt" type="range" min="0" max="2" step="0.05" value="1" />
-              <output id="cmbTiltValue">1.00</output>
-            </label> -->
             <button id="cmbRegenerate" type="button">Regenerate</button>
           </div>
           <div class="interactive-layout triple-layout">
@@ -186,21 +429,17 @@
             <canvas id="cmbSpectrumCanvas" class="wide-canvas" width="920" height="260"></canvas>
           </div>
         </div>
-
-          <p>
-            The CMB is random. Each realization looks different. The CMB phases carry no information. However, on average the CMB amplitude looks the same in every direction in Fourier space.
-             This embodies a physical principle that the sky is isotropic! This means we can reduce the 2D Fourier space object to 1D, which we call the power spectrum!
-             This is the average 2D Fourier amplitude in a radial ring. The structure of power spectrum contains the information of the CMB.
-          </p>
+        <p>
+          The CMB is random. Each realization looks different. The CMB phases carry no information. However, on average the CMB amplitude looks the same in every direction in Fourier space. This embodies a physical principle that the sky is isotropic. This means we can reduce the 2D Fourier space object to 1D, which we call the power spectrum. This is the average 2D Fourier amplitude in a radial ring. The structure of the power spectrum contains the information of the CMB.
+        </p>
       </section>
 
       <section class="interactive-section" id="draw-mode">
         <div class="section-copy">
-          <p class="eyebrow">Part 4</p>
+          <p class="eyebrow">Image 4</p>
           <h2>Realize your own power spectrum</h2>
           <p>
-            To get a better idea of what the power spectrum contains, try drawing different power spectra. Pressing the generate button will generate a new random draw. Each with the same power spectrum.
-            Similarly different structures in the power spectrum lead to different types of features in the maps. 
+            To get a better idea of what the power spectrum contains, try drawing different power spectra. Pressing the generate button will generate a new random draw, each with the same power spectrum. Similarly, different structures in the power spectrum lead to different types of features in the maps.
           </p>
         </div>
         <div class="interactive-shell">
@@ -209,7 +448,7 @@
               <div class="editor-header">
                 <div>
                   <h3>Power Spectrum P(k)</h3>
-                  <p class="status-text">Draw and generate!</p>
+                  <p class="status-text">Draw and generate.</p>
                 </div>
                 <div class="button-row">
                   <button id="drawClear" type="button">Clear</button>
@@ -228,11 +467,10 @@
 
       <section class="interactive-section" id="test-mode">
         <div class="section-copy">
-          <p class="eyebrow">Part 5</p>
+          <p class="eyebrow">Image 5</p>
           <h2>The cosmic test</h2>
           <p>
-           Judging whether two maps are the same is hard. Try to guess the power spectrum from one realization of the map. 
-           Even if you have the exact power spectrum, do the maps look the same?
+            Judging whether two maps are the same is hard. Try to guess the power spectrum from one realization of the map. Even if you have the exact power spectrum, do the maps look the same?
           </p>
         </div>
         <div class="interactive-shell">
@@ -241,7 +479,7 @@
               <div class="editor-header">
                 <div>
                   <h3>Draw the Power Spectrum</h3>
-                  <p class="status-text" id="testChallengeName">Press “New Challenge” to begin. This editor uses logarithmic k and P(k) axes.</p>
+                  <p class="status-text" id="testChallengeName">Press "New Challenge" to begin. This editor uses logarithmic k and P(k) axes.</p>
                 </div>
                 <div class="button-row">
                   <button id="testNewChallenge" type="button">New Challenge</button>
@@ -266,42 +504,35 @@
             </div>
           </div>
         </div>
-      <!-- <p>
-          Taken together these show that judging the information in a CMB map directly is hard! 
-          The CMB map is random, but that does not mean it contains no information.
-
-          Fourier tools allow us to access the coherent structure via the power spectrum. The specific shape of the power spectrum contains cosmic information.
-          
-         </p>--> 
       </section>
-
 
       <section class="interactive-section" id="properties">
         <div class="section-copy">
-          <p class="eyebrow">Part 6</p>
+          <p class="eyebrow">Image 6</p>
           <h2>Connecting to the Universe's properties</h2>
-        <p>
-          Taken together these show that judging the information in a CMB map directly is hard! 
-          The CMB map is random, but that does not mean it contains no information.
-
-          Fourier tools allow us to access the coherent structure via the power spectrum. The final question is how cosmic information is contained in the power spectrum?
-          That is explored below!
-         </p>
-
-            <figure class="feature-figure hero-video">
-            <video autoplay muted loop playsinline>
-              <source src="data/powerspectra.mp4" type="video/mp4">
+          <p>
+            Taken together these show that judging the information in a CMB map directly is hard. The CMB map is random, but that does not mean it contains no information.
+          </p>
+          <p>
+            Fourier tools allow us to access the coherent structure via the power spectrum. The final question is how cosmic information is contained in the power spectrum. That is explored below.
+          </p>
+        </div>
+        <div class="interactive-shell">
+          <figure class="feature-figure hero-video sound-media-figure">
+            <video autoplay muted loop playsinline controls>
+              <source src="data/powerspectra.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <figcaption>
-              The shape of the power spectrum is highly sensitive to the composition, age and properties of the primordial Universe.
-              This makes it a powerful tool for studying the Universe.
+              The shape of the power spectrum is highly sensitive to the composition, age, and properties of the primordial Universe.
             </figcaption>
           </figure>
+        </div>
       </section>
     </main>
 
     <script src="data/test-cls.js"></script>
     <script src="interactive-cmb.js"></script>
+    <script src="sound-section-demo.js"></script>
   </body>
 </html>
